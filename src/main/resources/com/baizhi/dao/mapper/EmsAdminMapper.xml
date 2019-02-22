@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.dao.EmsAdminDao">
+    <!-- EmsAdmin的resultMap,column是给数据库列起的别名,它对应property类的属性-->
+    <resultMap id="result_EmsAdmin_Map" type="com.baizhi.entity.EmsAdmin">
+        <id column="EMS_ID" property="emsId"/>
+        <result column="EMS_USERNAME" property="emsUsername"/>
+        <result column="EMS_REALNAME" property="emsRealname"/>
+        <result column="EMS_PASSWORD" property="emsPassword"/>
+        <result column="EMS_SEX" property="emsSex"/>
+        <result column="EMS_AGE" property="emsAge"/>
+        <result column="EMS_SALARY" property="emsSalary"/>
+    </resultMap>
+
+    <!-- 数据库中表名为:EMS_ADMIN的列名,as前是数据库的列明,as后是列的别名用于映射成实体类中的属性,需要注意的是别名必须与resultMap中的column别名一致 -->
+    <sql id="EMS_ADMIN_Column">
+        EMS_ADMIN.EMS_ID as EMS_ID
+        ,EMS_ADMIN.EMS_USERNAME as EMS_USERNAME
+        ,EMS_ADMIN.EMS_REALNAME as EMS_REALNAME
+        ,EMS_ADMIN.EMS_PASSWORD as EMS_PASSWORD
+        ,EMS_ADMIN.EMS_SEX as EMS_SEX
+        ,EMS_ADMIN.EMS_AGE as EMS_AGE
+        ,EMS_ADMIN.EMS_SALARY as EMS_SALARY
+    </sql>
+
+    <select id="selectByUserName" parameterType="java.lang.String" resultMap="result_EmsAdmin_Map">
+        select
+        <include refid="EMS_ADMIN_Column"/>
+        from EMS_ADMIN
+        where EMS_USERNAME=#{username}
+    </select>
+
+    <select id="selectAll" resultMap="result_EmsAdmin_Map">
+        select
+        <include refid="EMS_ADMIN_Column"/>
+        from EMS_ADMIN
+    </select>
+
+    <insert id="insert" parameterType="EmsAdmin">
+        insert into EMS_ADMIN values (SEQ_DRUG.nextval,#{admin.emsUsername},#{admin.emsRealname},#{admin.emsPassword},#{admin.emsSex},18,1111)
+    </insert>
+
+    <insert id="add" parameterType="EmsAdmin">
+        insert into EMS_ADMIN values (SEQ_DRUG.nextval,#{admin.emsUsername},#{admin.emsUsername},123,1,#{admin.emsAge},#{admin.emsSalary})
+    </insert>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from EMS_ADMIN where EMS_ID=#{id}
+    </delete>
+
+
+</mapper>

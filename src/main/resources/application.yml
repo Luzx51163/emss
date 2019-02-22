@@ -1,0 +1,32 @@
+server:
+  port: 8989
+  context-path: /emss
+  jsp-servlet:
+    init-parameters:
+      development: true
+
+spring:
+  datasource:
+    username: hr
+    password: hr
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:oracle:thin:@localhost:1521:xe
+    driver-class-name: oracle.jdbc.OracleDriver
+  http:
+    encoding:
+      charset: utf-8
+      force: true
+  mvc:
+    view:
+      prefix: /
+      suffix: .jsp
+#      视图解析器
+
+mybatis:
+  mapper-locations: classpath:com/baizhi/dao/mapper/*.xml
+  type-aliases-package: com.baizhi.entity
+
+
+
+
+
